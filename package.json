@@ -11,6 +11,11 @@
     "gulp-compass": "^2.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-plumber": "^1.0.1",
-    "gulp-watch": "^4.3.5"
+    "gulp-watch": "^4.3.5",
+    "gulp-connect": "",
+    "gulp-livereload": "",
+    "http-server": "",
+    "browser-sync": "",
+    "node-notifier": ""
   }
 }
