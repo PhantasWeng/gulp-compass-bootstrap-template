@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    // plumber = require('gulp-plumber'),
     notifier = require('node-notifier'),
     server = require('http-server'),
     compass = require('gulp-compass'),
@@ -34,7 +33,6 @@ gulp.task('jsLib', function() {
             path.bower + 'jquery/dist/jquery.min.js',
             path.bower + 'bootstrap/dist/js/bootstrap.min.js',
         ])
-        // .pipe(plumber())
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest(path.public + 'js'))
 });
@@ -42,7 +40,6 @@ gulp.task('jsLib', function() {
 // 編譯Compass
 gulp.task('compass', function() {
     return gulp.src(['./source/sass/'])
-        // .pipe(plumber())
         .pipe(compass({
             config_file: './config.rb' // ** 注意：這裡必需額外加入config.rb **
         }))
@@ -55,7 +52,6 @@ gulp.task('compass', function() {
 // 複製 Html 到 Public 資料夾
 gulp.task('html', function() {
     gulp.src(['./source/**/**.html'])
-        // .pipe(plumber())
         .pipe(gulp.dest(path.public))
 });
 
