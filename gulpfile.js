@@ -31,10 +31,11 @@ gulp.task('connect', function() {
 gulp.task('jsLib', function() {
     gulp.src([
             path.bower + 'jquery/dist/jquery.min.js',
+            path.bower + 'tether/dist/js/tether.min.js',
             path.bower + 'bootstrap/dist/js/bootstrap.min.js',
         ])
         .pipe(concat('vendor.js'))
-        .pipe(gulp.dest(path.public + 'js'))
+        .pipe(gulp.dest(path.public + 'js'));
 });
 
 // 編譯Compass
@@ -55,6 +56,16 @@ gulp.task('html', function() {
         .pipe(gulp.dest(path.public))
 });
 
+gulp.task('js', function() {
+    gulp.src(['./source/js/**.js'])
+        .pipe(gulp.dest(path.public + 'js'))
+});
+
+gulp.task('css', function() {
+    gulp.src(['./source/sass/**.css'])
+        .pipe(gulp.dest(path.public + 'stylesheets'))
+});
+
 // 監聽資料夾事件
 gulp.task('watch', function() {
     watch('./source/sass/**/*.sass', batch(function(events, done) {
@@ -63,7 +74,13 @@ gulp.task('watch', function() {
     watch('./source/**/**.html', batch(function(events, done) {
         gulp.start('html', done);
     }));
-    watch(['*.html', './**/*.css', './**/*.js'], { cwd: 'public' }, reload)
+    watch('./source/js/**/**.js', batch(function(events, done) {
+        gulp.start('js', done);
+    }));
+    watch('./source/sass/**/**.css', batch(function(events, done) {
+        gulp.start('css', done);
+    }));
+    watch(['./**/*.html','./**/*.css','./**/*.js'], { cwd: 'public' }, reload)
 });
 
 //瀏覽器重整
@@ -75,4 +92,4 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('default', ['jsLib', 'compass', 'html', 'connect', 'browser-sync', 'watch']);
+gulp.task('default', ['jsLib', 'compass', 'html','js','css', 'connect', 'browser-sync', 'watch']);
