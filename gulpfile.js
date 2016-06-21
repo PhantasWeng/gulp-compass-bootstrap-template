@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     browserSync = require('browser-sync').create(),
     reload = browserSync.reload;
+    
 // 定義路徑
 var path = {
     'source': './source/',
